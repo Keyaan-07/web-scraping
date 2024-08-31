@@ -14,3 +14,14 @@ def create_webdriver():
 
 browser = create_webdriver()
 browser.get("https://github.com/collections/machine-learning")
+
+
+projects = browser.find_elements("xpath", "//h1[@class='h3 lh-condensed']")
+
+project_list = {}
+for proj in projects:
+    proj_name = proj.text # Project name
+    proj_url = proj.find_elements("xpath", "a")[0].get_attribute('href') # Project URL
+    project_list[proj_name] = proj_url
+
+browser.quit()
