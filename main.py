@@ -25,3 +25,11 @@ for proj in projects:
     project_list[proj_name] = proj_url
 
 browser.quit()
+
+project_df = pd.DataFrame.from_dict(project_list, orient = 'index')
+
+project_df['project_name'] = project_df.index
+project_df.columns = ['project_url', 'project_name']
+project_df = project_df.reset_index(drop=True)
+
+project_df.to_excel('project_list.xlsx')
